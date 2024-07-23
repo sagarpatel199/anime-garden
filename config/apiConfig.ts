@@ -1,0 +1,1 @@
+export const baseAnimeURL = `https://consumet-api-kappa-teal.vercel.app/anime`;

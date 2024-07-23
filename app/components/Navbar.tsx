@@ -1,7 +1,7 @@
 "use client";
 import SignInButton from "./SignInButton";
 import { useSession } from "next-auth/react";
-
+import Link from "next/link";
 const Navbar = () => {
   const session = useSession();
 
@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <div className="flex bg-gray-300 gap-2 justify-center text-gray-800">
       <div>Home</div>
-      <div>Featured</div>
+      <Link href="/api/anime">Featured</Link>
 
       <div>
         <SignInButton />
