@@ -9,8 +9,9 @@ export async function GET() {
     try {
         const resultPopular  = await axios.get(`${baseAnimeURL}/gogoanime/popular`)
         const resultTopAiring  = await axios.get(`${baseAnimeURL}/gogoanime/top-airing`)
-        const resultRecentEpisodes  = await axios.get(`${baseAnimeURL}/gogoanime/recent-episodes`)
-        const homeAnime: animeHomePage[] = [resultPopular.data, resultTopAiring.data, resultRecentEpisodes.data]
+        const resultRecentlyUpdated  = await axios.get(`${baseAnimeURL}/gogoanime/recent-episodes`)
+        const homeAnime: animeHomePage[] = [resultPopular.data, resultTopAiring.data, resultRecentlyUpdated.data]
+       
         return res.json(homeAnime)
     } catch (error) {
         return res.json({ error: 'Internal server error' });
