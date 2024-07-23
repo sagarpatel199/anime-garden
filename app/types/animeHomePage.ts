@@ -1,4 +1,4 @@
-export interface animeTop {
+export interface AnimeTop {
     id: string,
     title: string,
     image: string,
@@ -10,8 +10,8 @@ export interface animeTop {
 
 }
 
-export interface animeHomePage{
+export interface AnimeHomePage{
     currentPage: number,
     hasNextPage: boolean,
-    results: animeTop[]
+    results: AnimeTop[]
 }

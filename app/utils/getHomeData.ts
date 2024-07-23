@@ -1,8 +1,8 @@
 import axios from "axios";
-import { animeHomePage } from "../types/animeHomePage";
+import { AnimeHomePage } from "../types/animeHomePage";
 
-const getHomeData = async (): Promise<animeHomePage[]> => {
-  const res = await axios.get(`http://localhost:3000/api/home`, {
+const getHomeData = async (): Promise<AnimeHomePage[]> => {
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/home`, {
     headers: {
       'Cache-Control': 'no-store',
     },

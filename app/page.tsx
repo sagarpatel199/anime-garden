@@ -1,5 +1,5 @@
 import AnimeHomeCard from "./components/AnimeHomeCard"
-import { animeHomePage } from "./types/animeHomePage"
+import { AnimeHomePage } from "./types/animeHomePage"
 import getHomeData from "./utils/getHomeData"
 
 // Styles
@@ -9,10 +9,10 @@ const homeCardStyle = "flex"
 
 
 const Home = async () => {
-	let homeAnime: animeHomePage[] = []
-	let homeAnimePopular: animeHomePage | undefined
-	let homeAnimeTopAiring: animeHomePage | undefined
-	let homeAnimeRecentlyUpdated: animeHomePage | undefined
+	let homeAnime: AnimeHomePage[] = []
+	let homeAnimePopular: AnimeHomePage | undefined
+	let homeAnimeTopAiring: AnimeHomePage | undefined
+	let homeAnimeRecentlyUpdated: AnimeHomePage | undefined
 
 	try {
 		homeAnime = await getHomeData()
