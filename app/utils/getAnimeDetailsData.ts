@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const getAbuneDetailsData = async (id: string) => {
+const getAnimeDetailsData = async (id: string) => {
 	try {
 		const res = await axios.get(`/api/anime/${id}`)
 		return res.data
@@ -9,4 +9,4 @@ const getAbuneDetailsData = async (id: string) => {
 	}
 }
 
-export default getAbuneDetailsData;
+export default getAnimeDetailsData;

@@ -12,18 +12,20 @@ const AnimeHomeCard = ({ anime }: { anime: AnimeTop }) => {
   return (
     <div
       onClick={() => router.push(`/anime/${anime.id}`)}
-      className="cursor-pointer h-52 w-36"
+      className="cursor-pointer h-auto w-fit rounded-lg overflow-hidden"
     >
       <Image
-        style={{ width: "100%", height: "150px" }}
-        height={150}
-        width={100}
+        style={{ width: "270px", height: "352px" }}
+        height={352}
+        width={270}
         src={anime.image}
         alt={title}
         draggable="false"
       />
       <div>
-        <h2 className="text-sm text-nowrap overflow-hidden">{title}</h2>
+        <h2 className="text-sm text-wrap line-clamp-2 overflow-hidden">
+          {title}
+        </h2>
         <p className="text-xs">
           {anime.releaseDate
             ? `Release Date: ${anime.releaseDate}`
