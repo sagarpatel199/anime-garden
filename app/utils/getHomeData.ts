@@ -5,8 +5,8 @@ const getHomeData = async (): Promise<AnimeHomePage[]> => {
   const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/home`
     , {
     headers: {
-      'Cache-Control': 'no-store',
-      //  cache: 'force-cache' 
+      //'Cache-Control': 'no-store',
+        cache: 'force-cache' 
     },
   }
   );
