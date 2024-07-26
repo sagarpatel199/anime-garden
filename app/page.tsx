@@ -29,43 +29,6 @@ const Home = async () => {
 			<HomeCarousel list={homeAnimePopular}/>
 			<HomeCarousel list={homeAnimeRecentlyUpdated}/>
 			<HomeCarousel list={homeAnimeTopAiring}/>
-			{/* <div className={homeListStyleOuter}>
-				<ArrowCircleLeftOutlinedIcon />
-				<div className={homeListStyle}>
-					{homeAnimePopular &&
-						homeAnimePopular.results.map((anime, index) => (
-							<div className="flex" key={index}>
-								<AnimeHomeCard anime={anime} />
-							</div>
-						))}
-				</div>
-				<ArrowCircleRightOutlinedIcon />
-			</div>
-			<div className={homeListStyleOuter}>
-				<ArrowCircleLeftOutlinedIcon />
-				<div className={homeListStyle}>
-					{homeAnimeRecentlyUpdated &&
-						homeAnimeRecentlyUpdated.results.map((anime, index) => (
-							<div className="flex" key={index}>
-								<AnimeHomeCard anime={anime} />
-							</div>
-						))}
-				</div>
-				<ArrowCircleRightOutlinedIcon />
-			</div>
-		
-			<div className={homeListStyleOuter}>
-				<ArrowCircleLeftOutlinedIcon />
-				<div className={homeListStyle}>
-					{homeAnimeTopAiring &&
-						homeAnimeTopAiring.results.map((anime, index) => (
-							<div className="flex" key={index}>
-								<AnimeHomeCard anime={anime} />
-							</div>
-						))}
-				</div>
-				<ArrowCircleRightOutlinedIcon />
-			</div> */}
 		</main>
 	)
 }
