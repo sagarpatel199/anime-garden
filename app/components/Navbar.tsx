@@ -9,8 +9,8 @@ const Navbar = () => {
 
   return (
     <div className="flex bg-gray-300 gap-2 justify-center text-gray-800">
-      <div>Home</div>
-      <Link href="/api/anime">Featured</Link>
+      <Link href="/">Home</Link>
+      <Link href="/anime/naruto">Featured</Link>
 
       <div>
         <SignInButton />

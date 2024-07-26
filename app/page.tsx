@@ -1,59 +1,73 @@
-import AnimeHomeCard from "./components/AnimeHomeCard";
-import { AnimeHomePage } from "./types/animeHomePage";
-import getHomeData from "./utils/getHomeData";
-
+import AnimeHomeCard from "./components/AnimeHomeCard"
+import HomeCarousel from "./components/ScrollList"
+import { AnimeHomePage } from "./types/animeHomePage"
+import getHomeData from "./utils/getHomeData"
+import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined"
+import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined"
 // Styles
-const homeListStyle = "flex gap-2 p-2  overflow-x-scroll";
-const homeListStyleVertical = "flex flex-col gap-2 p-2 w-full";
-const homeCardStyle = "flex";
+const homeListStyle = "flex flex-nowrap gap-2 p-2 w-full overflow-x-auto border-2"
+const homeListStyleOuter = "flex flex-row w-full overflow-x-auto scroll-smooth justify-center items-center "
+const homeCardStyle = "flex"
 
 const Home = async () => {
-  let homeAnime: AnimeHomePage[] = [];
-  let homeAnimePopular: AnimeHomePage | undefined;
-  let homeAnimeTopAiring: AnimeHomePage | undefined;
-  let homeAnimeRecentlyUpdated: AnimeHomePage | undefined;
+	let homeAnime: AnimeHomePage[] = []
+	let homeAnimePopular: AnimeHomePage | undefined
+	let homeAnimeTopAiring: AnimeHomePage | undefined
+	let homeAnimeRecentlyUpdated: AnimeHomePage | undefined
 
-  try {
-    homeAnime = await getHomeData();
-    homeAnimePopular = homeAnime[0];
-    homeAnimeTopAiring = homeAnime[1];
-    homeAnimeRecentlyUpdated = homeAnime[2];
-  } catch (error) {
-    return <div>Error:</div>;
-  }
+	try {
+		homeAnime = await getHomeData()
+		homeAnimePopular = homeAnime[0]
+		homeAnimeTopAiring = homeAnime[1]
+		homeAnimeRecentlyUpdated = homeAnime[2]
+	} catch (error) {
+		return <div>Error: {error.message}</div>
+	}
 
-  return (
-    <main className="flex min-h-screen flex-col items-start justify-between p-12">
-      {/* <div className="flex flex-col w-5/6 gap-4"> */}
-      <div className={homeListStyle}>
-        {homeAnimePopular &&
-          homeAnimePopular.results.map((anime, index) => (
-            <div className="flex" key={index}>
-              <AnimeHomeCard anime={anime} />
-            </div>
-          ))}
-      </div>
-      <div className={homeListStyle}>
-        {homeAnimeRecentlyUpdated &&
-          homeAnimeRecentlyUpdated.results.map((anime, index) => (
-            <div className="flex" key={index}>
-              <AnimeHomeCard anime={anime} />
-            </div>
-          ))}
-      </div>
-      {/* </div> */}
-      {/* <div className="flex-1 w-1/6"> */}
-      <div className={homeListStyle}>
-        {homeAnimeTopAiring &&
-          homeAnimeTopAiring.results.map((anime, index) => (
-            <div className="flex" key={index}>
-              <AnimeHomeCard anime={anime} />
-            </div>
-          ))}
-      </div>
-      {/* </div> */}
-    </main>
-  );
-};
+	return (
+		<main className="flex min-h-screen flex-col items-start justify-between p-12 gap-10 border-2 m-4 ">
+			<HomeCarousel list={homeAnimePopular}/>
+			<HomeCarousel list={homeAnimeRecentlyUpdated}/>
+			<HomeCarousel list={homeAnimeTopAiring}/>
+			{/* <div className={homeListStyleOuter}>
+				<ArrowCircleLeftOutlinedIcon />
+				<div className={homeListStyle}>
+					{homeAnimePopular &&
+						homeAnimePopular.results.map((anime, index) => (
+							<div className="flex" key={index}>
+								<AnimeHomeCard anime={anime} />
+							</div>
+						))}
+				</div>
+				<ArrowCircleRightOutlinedIcon />
+			</div>
+			<div className={homeListStyleOuter}>
+				<ArrowCircleLeftOutlinedIcon />
+				<div className={homeListStyle}>
+					{homeAnimeRecentlyUpdated &&
+						homeAnimeRecentlyUpdated.results.map((anime, index) => (
+							<div className="flex" key={index}>
+								<AnimeHomeCard anime={anime} />
+							</div>
+						))}
+				</div>
+				<ArrowCircleRightOutlinedIcon />
+			</div>
+		
+			<div className={homeListStyleOuter}>
+				<ArrowCircleLeftOutlinedIcon />
+				<div className={homeListStyle}>
+					{homeAnimeTopAiring &&
+						homeAnimeTopAiring.results.map((anime, index) => (
+							<div className="flex" key={index}>
+								<AnimeHomeCard anime={anime} />
+							</div>
+						))}
+				</div>
+				<ArrowCircleRightOutlinedIcon />
+			</div> */}
+		</main>
+	)
+}
 
-export default Home;
+export default Home
