@@ -1,12 +1,14 @@
 import axios from "axios";
 import { AnimeHomePage } from "../types/animeHomePage";
+import { cache } from 'react'
 
-const getHomeData = async (): Promise<AnimeHomePage[]> => {
+
+const getHomeData = cache(async (): Promise<AnimeHomePage[]> => {
   const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/home`
     , {
     headers: {
-      'Cache-Control': 'no-store',
-      //  cache: 'force-cache' 
+      //'Cache-Control': 'no-store',
+        cache: 'force-cache' 
     },
   }
   );
@@ -16,6 +18,6 @@ const getHomeData = async (): Promise<AnimeHomePage[]> => {
   }
 
   return res.data;
-};
+});
 
 export default getHomeData;
