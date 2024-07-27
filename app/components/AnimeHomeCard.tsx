@@ -12,26 +12,13 @@ const AnimeHomeCard = ({ anime }: { anime: AnimeTop }) => {
 	}else{
 		title = anime.title
 	}
-  // const handleMouseOver = async () => {
-  //   try {
-      // const res: AnimeDetails = await getAnimeDetailsData(anime.id);  // Fetch anime details
-      // setDetails(res)
-  //   } catch (error) {
-  //     console.error('Error fetching anime details:', error);
-  //   }
-  // };
 
-
-  // const handleMouseOver = () => {
- 
-  // }
 
   
  
 	return (
 		<div
 			onClick={() => router.push(`/anime/${anime.id}`)}
-   
 			className="cursor-pointer h-auto w-36  flex flex-col rounded-lg relative group transition-transform duration-100 hover:scale-110 border">
 			<div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center text-white text-xs text-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-100">
 				{title}
