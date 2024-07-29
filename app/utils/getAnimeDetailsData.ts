@@ -1,13 +1,13 @@
 import axios from "axios"
-
-const getAnimeDetailsData = async (id: string) => {
+import {cache} from "react"
+const getAnimeDetailsData = cache(async (id: string) => {
 	try {
 		const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/anime/${id}`)
 		return res.data
 	} catch (error) {
 		console.error("Failed to fetch anime details", error)
 	}
-}
+});
 
 export default getAnimeDetailsData;
 
