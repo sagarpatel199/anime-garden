@@ -1,58 +1,75 @@
 // src/app/anime/[id]/page.tsx
 
-"use client"
-import React, { useEffect } from "react"
-import { useState } from "react"
-import { AnimeDetails } from "@/app/types/animeDetails"
-import getAnimeDetailsData from "@/app/utils/getAnimeDetailsData"
-import Image from "next/image"
-import { CircularProgress } from "@mui/material"
+"use client";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import getVideoData from "../../utils/getVideoData";
+import { AnimeDetails } from "@/app/types/animeDetails";
+import getAnimeDetailsData from "@/app/utils/getAnimeDetailsData";
+import Image from "next/image";
+import { CircularProgress } from "@mui/material";
+import VideoComponent from "@/app/components/VideoComponent";
 const Anime = ({ params }: { params: { id: string } }) => {
-	const [animeDetails, setAnimeDetails] = useState<AnimeDetails | null>(null)
-	const id = params.id
-	console.log(id)
+  const [animeDetails, setAnimeDetails] = useState<AnimeDetails | null>(null);
+  const id = params.id;
+  console.log(id);
 
-	useEffect(() => {
-		if (id) {
-			const fetchAnimeDetails = async () => {
-				try {
-					const details = await getAnimeDetailsData(id as unknown as string)
-					setAnimeDetails(details);
-				} catch (error) {
-					console.error("Failed to fetch anime details", error)
-				}
-			}
-			fetchAnimeDetails()
-		}
-	}, [])
+  let videoURL;
+  if (animeDetails) {
+    videoURL = getVideoData(animeDetails.episodes[0].id);
+  }
 
-	if (!animeDetails) {
-		return (
+  useEffect(() => {
+    if (id) {
+      const fetchAnimeDetails = async () => {
+        try {
+          const details = await getAnimeDetailsData(id as unknown as string);
+          setAnimeDetails(details);
+        } catch (error) {
+          console.error("Failed to fetch anime details", error);
+        }
+      };
+      fetchAnimeDetails();
+    }
+  }, []);
+
+  if (!animeDetails) {
+    return (
       <div className="fixed inset-0 flex justify-center items-center bg-white bg-opacity-100 border">
+        <CircularProgress color="success" />
+      </div>
+    );
+  }
+  console.log(animeDetails);
+  return (
+    <div className="p-2 grid  items-center">
+      <div>
+        <VideoComponent
+          videoUrl={
+            "https://www111.vipanicdn.net/streamhls/0789fd4f049c3ca2a49b860ea5d1f456/ep.1.1709225406.720.m3u8"
+          }
+        />
+      </div>
+      <div className="outline inset-1">
+        <Image
+          src={animeDetails?.image || "@app/public/vercel.svg"}
+          height={500}
+          width={300}
+          alt={animeDetails?.title || "Image"}
+        />
+      </div>
 
-				<CircularProgress color="success" />
-			</div>
-		)
-	}
-	console.log(animeDetails)
-	return (
-		<div className="grid justify-items-center items-center">
-			<Image
-				src={animeDetails?.image || "@app/public/vercel.svg"}
-				height={500}
-				width={300}
-				alt={animeDetails?.title || "Image"}
-			/>
-			<h3>{animeDetails?.releaseDate}</h3>
-			<h3>{animeDetails?.totalEpisodes}</h3>
-			<h3>{animeDetails?.type}</h3>
-			<h3>{animeDetails?.url}</h3>
+      <h3>{animeDetails?.releaseDate}</h3>
+      <h3>{animeDetails?.totalEpisodes}</h3>
+      <h3>{animeDetails?.type}</h3>
+      <h3>{animeDetails?.url}</h3>
 
-			{animeDetails && animeDetails.episodes.map((episode, index) => <div>{episode.id}</div>)}
-		</div>
-	)
-}
-export default Anime
+      {animeDetails &&
+        animeDetails.episodes.map((episode, index) => <div>{episode.id}</div>)}
+    </div>
+  );
+};
+export default Anime;
 
 //____________________________________________________________________________
 // Server side code
