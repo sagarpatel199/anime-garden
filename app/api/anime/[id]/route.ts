@@ -2,7 +2,7 @@
 
 import { NextResponse } from 'next/server';
 import axios from 'axios';
-import { AnimeDetails } from '@/app/types/animeDetails';
+import { AnimeDetails } from '@/app/types/AnimeDetails';
 import { baseAnimeURL } from "@/config/apiConfig";
 
 const res = NextResponse;

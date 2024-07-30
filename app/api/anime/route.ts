@@ -1,7 +1,7 @@
 // src/app/api/anime/route.ts
 
 import axios from "axios"
-import { AnimeList } from "@/app/types/anime"
+import { AnimeList } from "@/app/types/Anime"
 import { NextResponse } from "next/server"
 import { baseAnimeURL } from "@/config/apiConfig";
 

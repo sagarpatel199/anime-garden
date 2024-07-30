@@ -1,6 +1,6 @@
 import AnimeHomeCard from "./components/AnimeHomeCard"
 import HomeCarousel from "./components/ScrollList"
-import { AnimeHomePage } from "./types/animeHomePage"
+import { AnimeHomePage } from "./types/animeHomePageInterface"
 import getHomeData from "./utils/getHomeData"
 import ArrowCircleLeftOutlinedIcon from "@mui/icons-material/ArrowCircleLeftOutlined"
 import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined"

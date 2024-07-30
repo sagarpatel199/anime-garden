@@ -27,7 +27,7 @@
 
 "use client"
 import React, { useRef, useState } from "react"
-import { AnimeHomePage } from "../types/animeHomePage"
+import { AnimeHomePage } from "../types/animeHomePageInterface"
 
 import ArrowBackIosTwoToneIcon from '@mui/icons-material/ArrowBackIosTwoTone';
 import ArrowForwardIosTwoToneIcon from '@mui/icons-material/ArrowForwardIosTwoTone';

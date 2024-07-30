@@ -1,5 +1,5 @@
 "use client"
-import { AnimeTop } from "../types/animeHomePage"
+import { AnimeTop } from "../types/animeHomePageInterface"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 const AnimeHomeCard = ({ anime }: { anime: AnimeTop }) => {

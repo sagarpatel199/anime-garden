@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AnimeHomePage } from "../types/animeHomePage";
+import { AnimeHomePage } from "../types/animeHomePageInterface";
 import { cache } from 'react'
 
 
