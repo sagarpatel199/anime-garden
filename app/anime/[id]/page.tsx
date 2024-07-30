@@ -16,15 +16,12 @@
 //   const id = params.id;
 //   console.log(id);
 
-
-
 //   useEffect(() => {
 //     if (id) {
 //       const fetchAnimeDetails = async () => {
 //         try {
 //           const details = await getAnimeDetailsData(id as unknown as string);
 //           setAnimeDetails(details);
-
 
 //           const sources = await getVideoData(details.episodes[0].id);
 //           setVideoSources(sources);
@@ -73,49 +70,64 @@
 // };
 // export default Anime;
 
-
 // _________________________________________________________________________________________________________
 
 // SWR library
 
-"use client"
-import useSWR from "swr"
-import axios from "axios"
-import Image from "next/image"
-import { AnimeDetails } from "@/app/types/animeDetails"
-import { CircularProgress } from "@mui/material"
-import { useEffect, useState } from "react"
-import EpisodeList from "@/app/components/EpisodeList"
-import { AnimeInfo } from "@/app/components/AnimeInfo"
+"use client";
+import useSWR from "swr";
+import axios from "axios";
+import Image from "next/image";
+import { AnimeDetails } from "@/app/types/animeDetails";
+import { CircularProgress } from "@mui/material";
+import { useEffect, useState } from "react";
+import EpisodeList from "@/app/components/EpisodeList";
+import { AnimeInfo } from "@/app/components/AnimeInfo";
+import VideoComponent from "@/app/components/VideoComponent";
+import { VideoSource } from "@/app/types/videoInterface";
+import { baseAnimeURL } from "@/config/apiConfig";
 
-const fetcher = (url: string) => axios.get(url).then((res) => res.data)
+const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const Anime = ({ params }: { params: { id: string } }) => {
-	const { id } = params
-	const { data: animeDetails, error } = useSWR<AnimeDetails>(`/api/anime/${id}`, fetcher)
-  const [episodeId, setEpisodeId]= useState<string | null>();
+  const { id } = params;
+  const { data: animeDetails, error } = useSWR<AnimeDetails>(
+    `/api/anime/${id}`,
+    fetcher
+  );
+  const [episodeId, setEpisodeId] = useState<string | null>();
 
   useEffect(() => {
     if (animeDetails && animeDetails.episodes.length > 0) {
       setEpisodeId(animeDetails.episodes[0].id);
+
+      const { data: videoSource, error } = useSWR<VideoSource[]>(
+        `${baseAnimeURL}/gogoanime/watch/${episodeId}`,
+        fetcher
+      );
+      console.log(videoSource, "Video Source");
     }
   }, [animeDetails]);
 
-  
-	if (error) return <div>Failed to load</div>
-	if (!animeDetails)
-		return (
-			<div className="fixed inset-0 flex justify-center items-center bg-white bg-opacity-100 border">
-				<CircularProgress color="success" />
-			</div>
-		)
-    // console.log(episodeId)
-	return (
-		<div className="grid justify-items-center items-center">
-      <AnimeInfo animeDetails={animeDetails}/>
-			<EpisodeList selectedEpisodeid={episodeId} episodes={animeDetails.episodes} setSelectedEpisodeId={setEpisodeId}/>
-		</div>
-	)
-}
+  if (error) return <div>Failed to load</div>;
+  if (!animeDetails)
+    return (
+      <div className="fixed inset-0 flex justify-center items-center bg-white bg-opacity-100 border">
+        <CircularProgress color="success" />
+      </div>
+    );
+  // console.log(episodeId)
+  return (
+    <div className="grid justify-items-center items-center">
+      {/* <VideoComponent episodeId={episodeId} /> */}
+      <AnimeInfo animeDetails={animeDetails} />
+      <EpisodeList
+        selectedEpisodeid={episodeId}
+        episodes={animeDetails.episodes}
+        setSelectedEpisodeId={setEpisodeId}
+      />
+    </div>
+  );
+};
 
-export default Anime
+export default Anime;
